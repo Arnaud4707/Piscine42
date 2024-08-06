@@ -1,0 +1,12 @@
+touch - t YYMMDDhhmm file
+	crée et modifie la date du fichier
+mkdir folder
+	crée un dossier
+truncate -s 1 file
+	garde 1 espace de memoir du fichier
+ln -n file file
+	crée un lien entre 2 fichier
+ln -s file link
+	crée un lien symbolique entre 2 entité
+sudo
+	pour outre-passer les permission

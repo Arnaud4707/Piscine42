@@ -1,0 +1,12 @@
+touch testShell
+	crée un fichier testShell
+tar -cvf testShell.tar testShell
+	crée un fichier .tar en compressant le fichier testShell
+rm testShell
+	supprime le fichier testShell
+chmod 755 testShell.tar
+	donne les droit d'acces(lecture,écriture,exécution) au user (4=r;2=w;1=x)
+truncate -s 40 testShell.tar
+	supprime l'espace mémoire dur fichier testShell jusqu'à en obtenir que 40
+touch -t 2406012342 testShell.tar
+	modifie la date de création du fichier testShell.tar (forma:YYMMddhhmm[ss])
