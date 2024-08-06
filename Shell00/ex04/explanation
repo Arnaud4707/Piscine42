@@ -1,0 +1,2 @@
+ls -cmp
+	liste le fichier -c par date; -m séparer par une virgule; -p en ajoutant / devant les dossier
