@@ -1,0 +1,5 @@
+git ls-files -o -i --exclude-standard
+	liste les fichiers de votre depot git (ls-files)
+	liste les fichiers qui sont uniquement dans votre depot local (-o)
+	liste les fichiers de votre depot local qui sont ignoré par votre depot git (-o -i -exclude-standard)
+									:fichier noter dans le .gitignore
