@@ -1,0 +1,4 @@
+id -Gn | tr ' ', ','
+	liste les information de l'utilisateur (-Gn) pour les noms des groupe
+	| operateur et
+	tr remplace un element par une autre

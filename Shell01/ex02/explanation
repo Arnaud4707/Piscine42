@@ -1,0 +1,2 @@
+find . -type f -name "*.sh" | cut -d "." -f2 | cut -d "/" -f2
+	cut -d "." -f2 supprime les elements dans "" -f1 supprime à partir de

@@ -1,0 +1,2 @@
+find . | wc -l
+	wc -l compte le nombre de ligne
