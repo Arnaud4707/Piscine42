@@ -1,0 +1,2 @@
+diff a b > file
+	permet de voir les différences entre 2 fichier, ">" ecrit dans le fichier
