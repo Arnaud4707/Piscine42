@@ -6,7 +6,7 @@
 /*   By: amugisha <amugisha6@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 20:35:39 by amugisha          #+#    #+#             */
-/*   Updated: 2024/08/17 20:12:28 by amugisha         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:41:13 by amugisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	rush(int x, int y);
 
-int	putnbr(char *str)
+int	ft_atoi(char *str)
 {
 	int	i;
 	int	result;
@@ -31,6 +31,20 @@ int	putnbr(char *str)
 	return (result);
 }
 
+int	checknbr(char *nbr)
+{
+	int	i;
+
+	i = 0;
+	while (nbr[i])
+	{
+		if ((nbr[i] - 48) > 9 || (nbr[i] - 48) < 0)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 int	main(int arg, char **argv)
 {
 	int	x;
@@ -42,9 +56,14 @@ int	main(int arg, char **argv)
 		write(1, "Erreur argument y manquant\n", 27);
 	else
 	{
-		x = putnbr(argv[1]);
-		y = putnbr(argv[2]);
-		rush(x, y);
+		if (checknbr(argv[1]) != 0 || checknbr(argv[2]) != 0)
+			write(1, "Erreur veuillez inserer que des entiers positifs\n", 49);
+		else
+		{
+			x = ft_atoi(argv[1]);
+			y = ft_atoi(argv[2]);
+			rush(x, y);
+		}
 	}
 	return (0);
 }
