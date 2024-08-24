@@ -6,7 +6,7 @@
 /*   By: amugisha <amugisha6@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 17:24:17 by amugisha          #+#    #+#             */
-/*   Updated: 2024/08/15 21:46:13 by amugisha         ###   ########.fr       */
+/*   Updated: 2024/08/24 14:58:59 by amugisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	print(char str)
 void	ft_putstr_non_printable(char *str)
 {
 	int		i;
-	char	x[2];
 
 	i = 0;
 	while (str[i])

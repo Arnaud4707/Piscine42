@@ -6,81 +6,57 @@
 /*   By: amugisha <amugisha6@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 22:04:42 by amugisha          #+#    #+#             */
-/*   Updated: 2024/08/16 20:20:50 by amugisha         ###   ########.fr       */
+/*   Updated: 2024/08/24 14:57:34 by amugisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-void	putstr(char *dest, char *src)
+void	print_text(void *text, unsigned int size)
 {
-	int	i;
+	unsigned int	i;
+	char			*contenu;
 
-	i = 0;
-	while (src[i])
+	contenu = (char *) text;
+	i = -1;
+	while (++i < size)
 	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-}
-
-void	print(char str)
-{
-	int		i;
-	char	c[17];
-	char	x[2];
-
-	i = 0;
-	x[0] = str / 16 + '0';
-	x[1] = str % 16;
-	write(1, "\\", 1);
-	write(1, &x[0], 1);
-	putstr(c, "0123456789abcdef");
-	while (c[i])
-	{
-		if (i == x[1])
-			write(1, &c[i], 1);
-		i++;
-	}
-}
-
-void	ft_putstr_non_printable(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] < 32 || str[i] > 126)
+		if (contenu[i] < ' ' || contenu[i] > '~')
 		{
-			print(str[i]);
+			write(1, ".", 1);
 		}
 		else
-			write(1, &str[i], 1);
-		i++;
+			write(1, &contenu[i], 1);
 	}
 }
 
-int	main(void)
+void	print_hexa(char contenu)
 {
-	void	*a = "Bon";
-	unsigned long	b = (unsigned long) a;
-	size_t		i;
+	char	*base_hexa;
+	char	c;
+
+	base_hexa = "0123456789abcdef";
+	c = (char) contenu;
+	write(1, &base_hexa[c / 16], 1);
+	write(1, &base_hexa[c % 16], 1);
+}
+
+void	print_addr(unsigned long addrlong)
+{
+	int		i;
 	char	adr[17];
-	char	*hexa;
+	char	*base_hexa;
 
 	i = -1;
 	adr[16] = 0;
-	hexa = "0123456789abcdef";
-	printf("%p\n", &a);
+	base_hexa = "0123456789abcdef";
 	while (++i <= 16)
 	{
-		if (b > 0)
+		if (addrlong > 0)
 		{
-			adr[15 - i] = hexa[b % 16];
-			b /= 16;
+			adr[15 - i] = base_hexa[addrlong % 16];
+			addrlong /= 16;
 		}
 		else
 		{
@@ -89,5 +65,45 @@ int	main(void)
 	}
 	write(1, adr, 16);
 	write(1, ": ", 2);
-	return (0);
 }
+
+void	print_line(void *addr, unsigned int size)
+{
+	unsigned int		i;
+	char				*contenu;
+
+	contenu = (char *) addr;
+	i = -1;
+	print_addr((unsigned long) addr);
+	while (++i < 16)
+	{
+		if (i < size)
+			print_hexa(contenu[i]);
+		else
+			write(1, "  ", 2);
+		if (i % 2 == 1)
+			write(1, " ", 1);
+	}
+	print_text(addr, size);
+	write(1, "\n", 1);
+}
+
+void	*ft_print_memory(void *addr, unsigned int size)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i++ < size / 16)
+		print_line(addr + 16 * (i - 1), 16);
+	if (size % 16 != 0)
+		print_line(addr + 16 * (i - 1), size % 16);
+	return (addr);
+}
+/*
+int	main(void)
+{
+	void	*tab = "Bonjours\t tous\0 le ~\nmonde\0 ";
+
+	ft_print_memory(tab, 28);
+	return (0);
+}*/
